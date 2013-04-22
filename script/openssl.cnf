@@ -1,0 +1,49 @@
+[ ca ]
+default_ca = dev_keys
+
+[ dev_keys ]
+# Text database file
+database = tmp/index.txt
+
+# The current serial number
+serial = tmp/serial
+
+# Section names
+policy = ca_policy
+x509_extensions = certificate_extensions
+
+[ ca_policy ]
+C = optional
+ST = optional
+L = optional
+O = optional
+OU = optional
+CN = supplied
+emailAddress = optional
+
+[ certificate_extensions ]
+basicConstraints = CA:false
+extendedKeyUsage = serverAuth
+
+[ req ]
+x509_extensions = root_ca_extensions
+
+# Generate a v3 CA.
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer
+string_mask = utf8only
+basicConstraints = CA:true
+distinguished_name = ca_dn
+x509_extensions = ca_extensions
+
+[ ca_dn ]
+C = US
+ST = Massachusetts
+L = Cambridge
+O = MIT CSAIL
+OU = NetMap Dev Keys
+CN = Dev CA
+emailAddress = netmap@mit.edu
+
+[ ca_extensions ]
+basicConstraints = CA:true

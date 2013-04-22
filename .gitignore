@@ -1,0 +1,5 @@
+# OpenSSL state directory.
+tmp/
+
+# Vim.
+*.swp
