@@ -1,6 +1,8 @@
 #!/bin/sh
 # The script used to generate the development VM keys.
 
+set -o errexit  # Stop the script on the first error.
+set -o nounset  # Catch un-initialized variables.
 
 # OpenSSL state.
 mkdir -p tmp

@@ -1,0 +1,9 @@
+{
+  "app": {
+    "id": 123456789,
+    "secret": "DevelopmentSecret-_-00",
+    "name": "Development Keys",
+    "url": "http://netmap.local/metrics",
+    "email": "netmap+devs@localhost"
+  }
+}
