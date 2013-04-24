@@ -25,6 +25,14 @@ rm game.csr
 cat game.cer _ca.cer > game.crt
 rm game.cer
 
-# The metrics server is on the same VM, so it should use the same key.
-cp game.pem metrics.pem
-cp game.crt metrics.crt
+# Metrics server key and certificate signing request.
+openssl req -nodes -newkey rsa:2048 -sha1 \
+    -out metrics.csr -outform PEM -keyout metrics.pem -keyform PEM \
+    -subj "/C=US/ST=Massachusetts/L=Cambridge/O=MIT CSAIL/OU=NetMap Dev Keys/CN=netmap.local:8443"
+
+# Metrics server certificate
+openssl ca -config script/openssl.cnf -batch -cert _ca.cer -keyfile _ca.pem \
+    -md sha1 -days 3650 -in metrics.csr -out metrics.cer -outdir tmp -notext
+rm metrics.csr
+cat metrics.cer _ca.cer > metrics.crt
+rm metrics.cer
